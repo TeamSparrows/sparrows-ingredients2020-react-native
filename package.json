@@ -21,8 +21,10 @@
   },
   "dependencies": {
     "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "expo": "^20.0.0",
     "express": "^4.15.4",
+    "mongoose": "^4.11.8",
     "morgan": "^1.8.2",
     "path": "^0.12.7",
     "react": "16.0.0-alpha.12",
