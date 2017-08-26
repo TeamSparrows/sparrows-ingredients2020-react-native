@@ -21,7 +21,7 @@ app.post('/api/findOrCreateUser', handler.findOrCreateUser);
 //test routes
 app.get('/api/test', (req, res) => {
 
-  res.send(req.body)
+  res.json("get request sent to '/api/test'")
 })
 app.post('/api/test', (req, res) => {
   res.send(req.body)
