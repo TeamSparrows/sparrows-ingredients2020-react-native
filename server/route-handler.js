@@ -1,10 +1,10 @@
-var db = require('./db/config');
-var User = require('./db/models/users');
-var Ingredient = require('./db/models/ingredients');
+var db = require('../db/config');
+var User = require('../db/models/users');
+var Ingredient = require('../db/models/ingredients');
 var path = require('path');
 
-process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development';
-console.log('process.env.ENVIRONMENT', process.env.ENVIRONMENT);
+// process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development';
+// console.log('process.env.ENVIRONMENT', process.env.ENVIRONMENT);
 
 if (process.env.ENVIRONMENT === 'production') {
   console.log('production mode')
