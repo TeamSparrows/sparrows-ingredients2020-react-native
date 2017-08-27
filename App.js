@@ -40,12 +40,20 @@ const address = require('./address');
 //   },
 // });
 
+const MainScreenNavigator = DrawerNavigator({
+  Text: { screen: TextScreen },
+  Photo: { screen: PhotoScreen },
+  Barcode: { screen: BarcodeScreen },
+  Allergies: { screen: AllergiesScreen },
+  Profile: { screen: ProfileScreen },
+});
+
 
 export default class App extends React.Component {
   render() {
     return (
       <View>
-        <Text>Hello World!</Text>
+        <MainScreenNavigator />
       </View>
     );
   }
