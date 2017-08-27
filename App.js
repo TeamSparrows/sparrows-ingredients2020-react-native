@@ -1,73 +1,12 @@
-// import React from 'react';
-// import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
-// import Welcome from './components/welcome';
-// import { DrawerNavigator } from 'react-navigation';
-
-// export default class App extends React.Component {
-//   componentDidMount() {
-
-//   }
-//   getMovieData() {
-//     fetch(`${address}:8000/api/test`)
-//       .then((response) => {
-//         var res = response.json()
-//         console.log('res', res);
-//         alert(response._bodyText)
-//       })
-//   }
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Welcome />
-//         <Text>Hello World!</Text>
-//         <Text>Open up App.js to start working on your app!</Text>
-//         <Text>Changes you make will automatically reload.</Text>
-//         <Text>Shake your phone to open the developer menu.</Text>
-//         <Button title="Movie Data" onPress={this.getMovieData.bind(this)} />
-//       </View>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 import React from 'react';
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
-
-
-class TextScreen extends React.Component {
-  render() {
-    return <Text>This is Text Screen</Text>
-  }
-}
-
-class PhotoScreen extends React.Component {
-  render() {
-    return <Text>This is Photo Screen</Text>
-  }
-}
-class BarcodeScreen extends React.Component {
-  render() {
-    return <Text>This is Barcode Screen</Text>
-  }
-}
-class AllergiesScreen extends React.Component {
-  render() {
-    return <Text>This is Allergies Screen</Text>
-  }
-}
-class ProfileScreen extends React.Component {
-  render() {
-    return <Text>This is Profile Screen</Text>
-  }
-}
+import TextScreen from './components/TextScreen'
+import PhotoScreen from './components/PhotoScreen'
+import BarcodeScreen from './components/BarcodeScreen'
+import AllergiesScreen from './components/AllergiesScreen'
+import ProfileScreen from './components/ProfileScreen'
+import Example from './components/Example'
 
 const MainScreenNavigator = DrawerNavigator({
   Text: { screen: TextScreen },
@@ -83,6 +22,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <MainScreenNavigator />
+        <Example />
       </View>
     );
   }
