@@ -15,11 +15,12 @@ export default class Example extends React.Component {
 
   }
   testAPI() {
-    axios.get(`${address}:8000/api/test`)
+    axios.get(`${address}:9000/api/test`)
       .then((response) => {
         // var res = response.json()
         // console.log('res', res);
-        alert(response.data)
+        console.log('Res Data',response.data);
+        Alert.alert(response.data)
       })
       .catch((err) => {
         console.log('err', err);
