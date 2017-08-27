@@ -20,10 +20,10 @@ app.post('/api/findOrCreateUser', handler.findOrCreateUser);
 
 //test routes
 app.get('/api/test', (req, res) => {
-
-  res.send(req.body)
+  res.send('hello string')
 })
 app.post('/api/test', (req, res) => {
+  console.log('req.body', req.body)
   res.send(req.body)
 })
 module.exports = app;
