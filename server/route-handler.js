@@ -2,9 +2,26 @@ var db = require('../db/config');
 var User = require('../db/models/users');
 var Ingredient = require('../db/models/ingredients');
 var path = require('path');
+var fs = require('fs')
+var moduleExists = false;
 
+// var pathToModule = path.join(__dirname, '../../', 'gkeys.json');
+// console.log('pathToModule', pathToModule);
 // process.env.ENVIRONMENT = process.env.ENVIRONMENT || 'development';
 // console.log('process.env.ENVIRONMENT', process.env.ENVIRONMENT);
+// fs.exists(pathToModule, function(doesExist) {
+//   if (doesExist) {
+//     console.log('json file exists')
+//
+//   } else {
+//     console.log('gkeys.json not found but was error handled')
+//   }
+// })
+
+var vision = require('@google-cloud/vision')({
+  keyFilename: '/../../gkeys.json',
+  projectId: 'sandbox-171422'
+});
 
 if (process.env.ENVIRONMENT === 'production') {
   console.log('production mode')
@@ -12,14 +29,9 @@ if (process.env.ENVIRONMENT === 'production') {
     keyFilename: process.env.KEYS,
     projectId: 'sandbox-171422'
   });
-} else {
-  var vision = require('@google-cloud/vision')({
-    keyFilename: '../Sandbox-7a20dde6100d.json',
-    projectId: 'sandbox-171422'
-  });
 }
 
-
+// '../Sandbox-7a20dde6100d.json'
 //createUser api route
 exports.findOrCreateUser = function(req, res) {
   var email = req.body.email;
