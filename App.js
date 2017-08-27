@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import Welcome from './components/welcome';
 import { DrawerNavigator } from 'react-navigation';
 const address = require('./address');
@@ -39,3 +39,14 @@ const address = require('./address');
 //     justifyContent: 'center',
 //   },
 // });
+
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <View>
+        <Text>Hello World!</Text>
+      </View>
+    );
+  }
+}
