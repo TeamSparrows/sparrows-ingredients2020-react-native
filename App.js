@@ -1,9 +1,7 @@
-import React from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import Welcome from './components/welcome';
-import { DrawerNavigator } from 'react-navigation';
-const address = require('./address');
-
+// import React from 'react';
+// import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+// import Welcome from './components/welcome';
+// import { DrawerNavigator } from 'react-navigation';
 
 // export default class App extends React.Component {
 //   componentDidMount() {
@@ -39,6 +37,37 @@ const address = require('./address');
 //     justifyContent: 'center',
 //   },
 // });
+import React from 'react';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { DrawerNavigator } from 'react-navigation';
+
+
+class TextScreen extends React.Component {
+  render() {
+    return <Text>This is Text Screen</Text>
+  }
+}
+
+class PhotoScreen extends React.Component {
+  render() {
+    return <Text>This is Photo Screen</Text>
+  }
+}
+class BarcodeScreen extends React.Component {
+  render() {
+    return <Text>This is Barcode Screen</Text>
+  }
+}
+class AllergiesScreen extends React.Component {
+  render() {
+    return <Text>This is Allergies Screen</Text>
+  }
+}
+class ProfileScreen extends React.Component {
+  render() {
+    return <Text>This is Profile Screen</Text>
+  }
+}
 
 const MainScreenNavigator = DrawerNavigator({
   Text: { screen: TextScreen },
@@ -52,9 +81,26 @@ const MainScreenNavigator = DrawerNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <MainScreenNavigator />
       </View>
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    marginTop: 24,
+  },
+  work: {
+    flex: 9,
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    margin: 20,
+  },
+  nav: {
+    flex: 1,
+    backgroundColor: '#40c4ff',
+  },
+});
