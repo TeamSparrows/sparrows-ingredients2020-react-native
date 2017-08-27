@@ -19,17 +19,17 @@ var moduleExists = false;
 // })
 
 var vision = require('@google-cloud/vision')({
-  keyFilename: '/../../gkeys.json',
+  keyFilename: '../gkeys.json',
   projectId: 'sandbox-171422'
 });
 
-if (process.env.ENVIRONMENT === 'production') {
-  console.log('production mode')
-  var vision = require('@google-cloud/vision')({
-    keyFilename: process.env.KEYS,
-    projectId: 'sandbox-171422'
-  });
-}
+// if (process.env.ENVIRONMENT === 'production') {
+//   console.log('production mode')
+//   var vision = require('@google-cloud/vision')({
+//     keyFilename: process.env.KEYS,
+//     projectId: 'sandbox-171422'
+//   });
+// }
 
 // '../Sandbox-7a20dde6100d.json'
 //createUser api route
