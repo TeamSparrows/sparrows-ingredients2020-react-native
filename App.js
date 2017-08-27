@@ -1,16 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Welcome from './components/welcome'
+const address = require('./address');
+
 export default class App extends React.Component {
   componentDidMount() {
 
   }
   getMovieData() {
-    fetch('https://facebook.github.io/react-native/movies.json')
+    fetch(`${address}:8000/api/test`)
       .then((response) => {
         var res = response.json()
         console.log('res', res);
-        alert('res ' + JSON.stringify(response))
+        alert(response._bodyText)
       })
   }
   render() {
