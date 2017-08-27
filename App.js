@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import Welcome from './components/welcome'
+import Welcome from './components/welcome';
+import { DrawerNavigator } from 'react-navigation';
 const address = require('./address');
+
 
 // export default class App extends React.Component {
 //   componentDidMount() {
