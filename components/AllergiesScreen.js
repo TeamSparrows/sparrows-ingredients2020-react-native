@@ -39,8 +39,6 @@ export default class AllergiesScreen extends React.Component {
     .catch(function (error) {
       console.log(error);
     });
-
-    console.log('This is the data variable line 24:',this.state.allergy);
   }
 
 
