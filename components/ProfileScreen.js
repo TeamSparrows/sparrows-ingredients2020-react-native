@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 
 
-export default class ProfileScreen extends React.Component {
+export default class ProfileScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -10,6 +10,21 @@ export default class ProfileScreen extends React.Component {
     }
     this.submitEmail = this.submitEmail.bind(this);
   }
+
+  postUser() {
+    var string = this.state.text
+    let data = {email: string}
+    let fetchData = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    }
+  }
+
+
   submitEmail(e) {
     e.preventDefault();
     var email = this._email.value
@@ -24,6 +39,6 @@ export default class ProfileScreen extends React.Component {
     })
   }
   render() {
-    return <Text>This is Profile Screen!</Text>
+    return <Button title="Post User Email" onPress={this.postUser} />
   }
 }
