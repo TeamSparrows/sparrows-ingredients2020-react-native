@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { TabNavigator, DrawerNavigator } from 'react-navigation';
-import TextScreen from './components/TextScreen'
+import SearchIngredients from './components/SearchIngredients'
 import PhotoScreen from './components/PhotoScreen'
 import BarcodeScreen from './components/BarcodeScreen'
 import AllergiesScreen from './components/AllergiesScreen'
 import ProfileScreen from './components/ProfileScreen'
-import Example from './components/Example'
+
 
 const MainScreenNavigator = TabNavigator({
-  Text: { screen: TextScreen },
+  Search: { screen: SearchIngredients },
   Photo: { screen: PhotoScreen },
   Barcode: { screen: BarcodeScreen },
   Allergies: { screen: AllergiesScreen },
@@ -17,12 +17,11 @@ const MainScreenNavigator = TabNavigator({
 });
 
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
         <MainScreenNavigator />
-        <Example />
       </View>
     );
   }
