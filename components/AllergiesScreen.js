@@ -27,10 +27,14 @@ export default class AllergiesScreen extends React.Component {
   render() {
   return (
     <View>
-        <TextInput/>
+        <TextInput
+          onChangeText={(text) => this._hello(text)}
+        />
         <Button
+          onPress={() => this._onPressButton(this.state.text)}
           title="Press Me"
         />
+        <Text>Local  : {this.state.text}</Text>
     </View>
     );
 
