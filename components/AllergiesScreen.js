@@ -3,7 +3,6 @@ import { Alert, Button, StyleSheet, Text, View } from 'react-native';
 
 
 export default class AllergiesScreen extends React.Component {
-  render() {
   constructor (props) {
     super(props);
     this.state = {
@@ -11,6 +10,13 @@ export default class AllergiesScreen extends React.Component {
       data : []
     };
   }
+
+  _loadData(text){
+    this.setState({
+      text : text
+    });
+  }
+  render() {
   return (
     <View>
         <TextInput/>
