@@ -40,13 +40,13 @@ export default class AllergiesScreen extends React.Component {
     data.username = 'd@d.com';
     data.allergy = this.state.allergy;
     console.log('This is the database data',data);
-    // axios.post(`${address}:9000/api/allergies/`, {data});
-    // .then(function (response) {
-    //   console.log(response.data);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+    axios.post(`${address}:9000/api/allergies/`, {data})
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   render() {
