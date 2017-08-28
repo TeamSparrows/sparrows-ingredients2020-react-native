@@ -34,7 +34,7 @@ var vision = require('@google-cloud/vision')({
 // '../Sandbox-7a20dde6100d.json'
 //createUser api route
 exports.findOrCreateUser = function(req, res) {
-  var email = req.body.email;
+  var email = req.body.data.email;
 
   User.findOne({username: email})
     .exec(function(err, user) {
