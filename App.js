@@ -6,7 +6,7 @@ import PhotoScreen from './components/PhotoScreen';
 import AllergiesScreen from './components/AllergiesScreen';
 import ProfileScreen from './components/ProfileScreen';
 import { ImagePicker } from 'expo';
-
+import { Ionicons } from '@expo/vector-icons';
 
 const MainScreenNavigator = TabNavigator({
   Search: { screen: SearchIngredients },
@@ -21,6 +21,10 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <MainScreenNavigator />
+        <Ionicons  name="md-checkmark-circle" size={32} color="lightblue" />
+        <Ionicons  name="md-aperture" size={32} color="lightblue" />
+        <Ionicons  name="md-flame" size={32} color="lightblue" />
+        <Ionicons  name="md-contact" size={32} color="lightblue" />
       </View>
     );
   }
