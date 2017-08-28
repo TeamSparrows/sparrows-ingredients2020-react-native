@@ -14,8 +14,6 @@ import {
   TextInput,
   ScrollView,
   Linking,
-
-
 } from 'react-native';
 
 import { Constants, WebBrowser } from 'expo';
@@ -97,13 +95,11 @@ export default class SearchIngredients extends Component {
 
     return (
       <View style={styles.container}>
-
-        <Text style={styles.hi} >Search harmful ingredients</Text>
         <TextInput
           ref={input=>this._input = input}
           style={styles.textInput}
           onChangeText={(text) => this.setState({text})}
-          placeholder='alum...'
+          placeholder='Search harmful ingredients....'
           onSubmitEditing={this.getIngredientsFromDatabase}
           autoCorrect={true}
           keyboardType="email-address"
@@ -112,7 +108,11 @@ export default class SearchIngredients extends Component {
           placeholderTextColor="lightblue"
           returnKeyType="search"
         />
-        <Button title="Enter Search" onPress={this.getIngredientsFromDatabase} />
+        <Button
+          title="Enter Search"
+          color="#841584"
+          onPress={this.getIngredientsFromDatabase}
+         />
         <View>{this.renderResult()}</View>
       </View>
     );
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: '#fff',
     marginTop: 50,
+    margin: 20,
   },
   boxSmall: {
     width: 200,
@@ -134,8 +135,6 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1
   },
   hi: {
     color: '#34495e',
