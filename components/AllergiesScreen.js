@@ -7,6 +7,9 @@ export default class AllergiesScreen extends React.Component {
     return (
       <View>
           <TextInput/>
+          <Button
+            title="Press Me"
+          />
       </View>
       );
 
