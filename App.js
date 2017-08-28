@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, Image, TextInput, View } from 'react-native';
 import { TabNavigator, DrawerNavigator } from 'react-navigation';
-import SearchIngredients from './components/SearchIngredients'
-import PhotoScreen from './components/PhotoScreen'
-import BarcodeScreen from './components/BarcodeScreen'
-import AllergiesScreen from './components/AllergiesScreen'
-import ProfileScreen from './components/ProfileScreen'
+import SearchIngredients from './components/SearchIngredients';
+import PhotoScreen from './components/PhotoScreen';
+import BarcodeScreen from './components/BarcodeScreen';
+import AllergiesScreen from './components/AllergiesScreen';
+import ProfileScreen from './components/ProfileScreen';
+import { ImagePicker } from 'expo';
 
 
 const MainScreenNavigator = TabNavigator({
