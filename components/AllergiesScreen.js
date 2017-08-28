@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 
 export default class AllergiesScreen extends React.Component {
@@ -21,22 +21,30 @@ export default class AllergiesScreen extends React.Component {
     this.setState({
       data : this.state.data.concat(text)
     });
-    // console.log('This is the data variable line 25:',this.state.data);
+    console.log('This is the data variable line 24:',this.state.data);
   }
 
   render() {
   return (
-    <View>
+    <View style={styles.container}>
         <TextInput
-          onChangeText={(text) => this._hello(text)}
+          style={{fontSize: 20, height: 40}}
+          onChangeText={(text) => this._loadData(text)}
         />
         <Button
           onPress={() => this._onPressButton(this.state.text)}
+          color="#841584"
           title="Press Me"
         />
         <Text>Local  : {this.state.text}</Text>
     </View>
     );
-
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    margin: 20,
+  },
+});
