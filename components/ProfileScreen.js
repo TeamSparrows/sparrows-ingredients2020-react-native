@@ -1,44 +1,111 @@
 import React, { Component } from 'react';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import axios from 'react-native-axios';
+const address = require('../address');
+import {
+  Alert,
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  TouchableHighlight,
+  TouchableOpacity,
+  Image,
+  Keyboard,
+  TextInput,
+  ScrollView,
+  Linking,
+} from 'react-native';
+
+import { Constants, WebBrowser } from 'expo';
 
 
 export default class ProfileScreen extends Component {
-  constructor() {
-    super();
+  // state = {
+  //   result: null,
+  // };
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
-    }
-    this.submitEmail = this.submitEmail.bind(this);
+    };
+    this.enterText = this.enterText.bind(this);
+    this.postUser = this.postUser.bind(this);
+    this.handlePress = this.handlePress.bind(this);
+    // this.renderResult = this.renderResult.bind(this);
   }
 
   postUser() {
-    var string = this.state.text
-    let data = {email: string}
-    let fetchData = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    }
-  }
-
-
-  submitEmail(e) {
-    e.preventDefault();
-    var email = this._email.value
-    var data = { email }
-    this.setState(data)
-    axios.post('/api/test-email', data)
+    let email = this.state.email;
+    let data = { email };
+    // axios.get(`${address}:9000/api/test`)
+    // axios.get(`${address}:9000/api/ingredients/${search}`)
+    axios.post(`${address}:9000/api/findOrCreateUser`, {data})
     .then((res) => {
-      console.log('res', res);
+      console.log('user email res.data', res.data);
     })
-    .catch((err) => {
-      console.log('err', err);
-    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
+
+  enterText() {
+    return (
+      <Text>{this.state.text}</Text>
+    )
+  }
+  handlePress = () => {
+    console.log('handlePress')
+    console.log('this.state.searchResultLink', this.state.searchResultLink);
+    // WebBrowser.openBrowserAsync(this.state.searchResultLink);
+    Linking.openURL(this.state.searchResultLink);
+  };
+
   render() {
-    return <Button title="Post User Email" onPress={this.postUser} />
+
+    return (
+      <View style={styles.container}>
+
+        <Text style={styles.hi}>User Profile</Text>
+        <TextInput
+          // style={styles.textInput}
+          onChangeText={(text) => this.setState({email: text})}
+          placeholder='Enter email...'
+          onSubmitEditing={this.postUser}
+          autoCorrect={true}
+          keyboardType="email-address"
+          blurOnSubmit={true}
+          keyboardAppearance="dark"
+          placeholderTextColor="lightblue"
+          returnKeyType="search"
+        />
+        <Button title="Enter Search" onPress={this.postUser} />
+        <View><Text>{this.state.email}</Text></View>
+      </View>
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 2,
+    backgroundColor: '#fff',
+    marginTop: 50,
+  },
+  boxSmall: {
+    width: 200,
+    height: 200,
+    marginBottom: 10,
+    marginRight: 10,
+    backgroundColor: 'skyblue',
+  },
+  textInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1
+  },
+  hi: {
+    color: '#34495e',
+    fontSize: 20
+  },
+
+});
