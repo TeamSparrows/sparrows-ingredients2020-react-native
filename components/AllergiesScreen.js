@@ -27,20 +27,26 @@ export default class AllergiesScreen extends React.Component {
 
   render() {
     return (
-      <View>
-        <TextInput
-          style={{fontSize: 20, height: 40}}
-          onChangeText={(text) => this._loadData(text)}
-        />
-        <Button
-          onPress={() => this._onPressButton(this.state.text)}
-          color="#841584"
-          title="Press Me"
-        />
-        <Text>Local  : {this.state.text}</Text>
+      <View style={styles.container}>
+          <TextInput
+            style={{fontSize: 20, height: 40}}
+            onChangeText={(text) => this._loadData(text)}
+          />
+          <Button
+            onPress={() => this._onPressButton(this.state.text)}
+            color="#841584"
+            title="Press Me"
+          />
+          <Text>Local  : {this.state.text}</Text>
       </View>
-
       );
-
-  }
+    }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    margin: 20,
+  },
+});
