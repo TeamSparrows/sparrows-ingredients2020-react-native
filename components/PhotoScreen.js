@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, Image, Text, View } from 'react-native';
 import { ImagePicker } from 'expo';
-
+const address = require('../address');
+import axios from 'react-native-axios';
 export default class PhotoScreen extends Component {
   constructor() {
     super();
@@ -9,11 +10,40 @@ export default class PhotoScreen extends Component {
       image: null,
     }
     this.sendImage = this.sendImage.bind(this)
+    this.handleFile = this.handleFile.bind(this)
   }
 
   sendImage() {
     var imgUri = this.state.image
+    var data = {
+      data_uri: this.state.image,
+      filename: 'pic1.jpg',
+      filetype: "image/jpeg",
+      username: 'd@d.com'
+    }
 
+    console.log('imgUri', imgUri)
+    axios.post(`${address}:9000/api/image`, {data})
+    .then((res) => {
+      // var result = {
+      //   searchResultName: res.data.name,
+      //   searchResultLink: res.data.link || ''
+      // }
+      console.log('result from sendImg!!!!!!!', res);
+      // this.setState(res);
+      console.log('sendImg res.data ',res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  handleFile(e) {
+    // const reader = new FileReader();
+    // console.log('reader', reader);
+    // console.log('FileReader', FileReader);
+    // const file = e.target.files[0];
+    console.log('e', e);
   }
 
   render() {
@@ -26,13 +56,18 @@ export default class PhotoScreen extends Component {
           title="Take a photo"
           onPress={this._shoot}
         />
+        <Button
+          title="Choose a Photo"
+          onPress={this._imageLibrary}
+        />
         {image && <Image
                     source={{ uri: image }}
                     style={{ width: 200, height: 200 }}
+                    onLoad={this.handleFile}
                   />}
 
         <Button
-          title="Take a photo"
+          title="Submit"
           onPress={this.sendImage}
         />
       </View>
@@ -45,10 +80,25 @@ export default class PhotoScreen extends Component {
       aspect: [4, 3],
     });
 
-    console.log(result);
+    console.log('image result', result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
     }
   };
+
+
+  _imageLibrary = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log('image result', result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
+
 }
