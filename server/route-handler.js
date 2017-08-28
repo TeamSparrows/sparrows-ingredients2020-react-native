@@ -101,12 +101,16 @@ exports.pastSearches = function(req, res) {
 
 exports.googleCloudSearch = function(req, res) {
   console.log('google cloudsearch ran')
-  var buf = new Buffer(req.body.data_uri.replace(/^data:image\/\w+;base64,/, ""),'base64');
+
+  console.log('google cloud search req.body', req.body);
+  console.log('google cloud search req.body.data_uri', req.body.data.data_uri);
+  var buf = new Buffer(req.body.data.data_uri.replace(/^data:image\/\w+;base64,/, ""),'base64');
   vision.textDetection({ content: buf }, function(err, apiResponse) {
     if(err) {
       res.end('Cloud Vision Error:', err);
     } else {
 
+      console.log('apiResponse', apiResponse);
       var detections = apiResponse.fullTextAnnotation.text;
       console.log('detections', detections);
       var arrayOfIngredients = [];
