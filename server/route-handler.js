@@ -58,7 +58,10 @@ exports.findOrCreateUser = function(req, res) {
 }
 
 //ingredient search api route
-exports.ingredients = function(req, res) {
+exports.ingredients = (req, res) => {
+  console.log('ingredients ran')
+  console.log('req.body', req.body);
+
   var ingredient = req.body.data.ingredient;
   var username = req.body.data.username;
 
@@ -79,7 +82,7 @@ exports.ingredients = function(req, res) {
 
         res.json(ingredientObj);
       }
-    });
+    })
 };
 
 //get past searches api route
