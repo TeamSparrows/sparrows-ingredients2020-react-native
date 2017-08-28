@@ -8,6 +8,8 @@ export default class PhotoScreen extends Component {
     super();
     this.state = {
       image: null,
+      encode: null,
+      success: "Success"
     }
     this.sendImage = this.sendImage.bind(this)
     this.handleFile = this.handleFile.bind(this)
@@ -16,7 +18,7 @@ export default class PhotoScreen extends Component {
   sendImage() {
     var imgUri = this.state.image
     var data = {
-      data_uri: this.state.image,
+      data_uri: this.state.encode,
       filename: 'pic1.jpg',
       filetype: "image/jpeg",
       username: 'd@d.com'
@@ -32,6 +34,12 @@ export default class PhotoScreen extends Component {
       console.log('result from sendImg!!!!!!!', res);
       // this.setState(res);
       console.log('sendImg res.data ',res.data);
+      var arrstr = '';
+      for (var i = 0; i < res.data.length; i++) {
+        arrstr += res.data[i].link + '\n';
+      }
+      console.log(arrstr);
+      Alert.alert(arrstr);
     })
     .catch((err) => {
       console.log(err);
@@ -47,7 +55,7 @@ export default class PhotoScreen extends Component {
   }
 
   render() {
-    let { image } = this.state;
+    let { image, success } = this.state;
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -63,9 +71,8 @@ export default class PhotoScreen extends Component {
         {image && <Image
                     source={{ uri: image }}
                     style={{ width: 200, height: 200 }}
-                    onLoad={this.handleFile}
+                    //onLoad={this.handleFile}
                   />}
-
         <Button
           title="Submit"
           onPress={this.sendImage}
@@ -78,12 +85,13 @@ export default class PhotoScreen extends Component {
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
       aspect: [4, 3],
+      base64: true
     });
 
     console.log('image result', result);
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.setState({ image: result.uri, encode: result.base64 });
     }
   };
 
@@ -92,12 +100,14 @@ export default class PhotoScreen extends Component {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [4, 3],
+      base64: true
     });
 
-    console.log('image result', result);
+    //console.log('image result', result);
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.setState({ image: result.uri, encode: result.base64 });
+      console.log(this.state.image);
     }
   };
 
