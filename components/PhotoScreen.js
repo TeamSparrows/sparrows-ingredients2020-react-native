@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, Image, Text, View } from 'react-native';
 import { ImagePicker } from 'expo';
 
-export default class PhotoScreen extends React.Component {
-  state = {
-    image: null,
-  };
+export default class PhotoScreen extends Component {
+  constructor() {
+    super();
+    this.state = {
+      image: null,
+    }
+    this.sendImage = this.sendImage.bind(this)
+  }
+
+  sendImage() {
+    var imgUri = this.state.image
+
+  }
 
   render() {
     let { image } = this.state;
@@ -17,8 +26,15 @@ export default class PhotoScreen extends React.Component {
           title="Take a photo"
           onPress={this._shoot}
         />
-        {image &&
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        {image && <Image
+                    source={{ uri: image }}
+                    style={{ width: 200, height: 200 }}
+                  />}
+
+        <Button
+          title="Take a photo"
+          onPress={this.sendImage}
+        />
       </View>
     );
   }
