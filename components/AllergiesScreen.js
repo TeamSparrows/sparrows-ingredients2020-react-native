@@ -1,5 +1,8 @@
 import React from 'react';
+import axios from 'react-native-axios';
+const address = require('../address');
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+
 
 
 export default class AllergiesScreen extends React.Component {
@@ -8,7 +11,7 @@ export default class AllergiesScreen extends React.Component {
     super(props);
     this.state = {
       text : '',
-      data : []
+      allergy : []
     };
   }
 
@@ -20,9 +23,23 @@ export default class AllergiesScreen extends React.Component {
 
   _onPressButton(text) {
     this.setState({
-      data : this.state.data.concat(text)
+      allergy : this.state.allergy.concat(text)
     });
-    console.log('This is the data variable line 24:',this.state.data);
+    console.log('This is the data variable line 24:',this.state.allergy);
+  }
+
+  _addToDatabase() {
+    var data = {};
+    data.username = 'd@d.com';
+    data.allergy = this.state.allergy;
+    console.log('This is the database data',data);
+    // axios.post(`${address}:9000/api/allergies/`, {data});
+    // .then(function (response) {
+    //   console.log(response.data);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
   }
 
   render() {
@@ -38,6 +55,11 @@ export default class AllergiesScreen extends React.Component {
             title="Press Me"
           />
           <Text>Local  : {this.state.text}</Text>
+          <Button
+            onPress={() => this._addToDatabase()}
+            color="#841584"
+            title="Add to MyList"
+          />
       </View>
       );
     }
