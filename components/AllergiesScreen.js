@@ -18,7 +18,6 @@ export default class AllergiesScreen extends React.Component {
     super(props);
     this.state = {
       text : '',
-      allergy : []
     };
   }
 
@@ -29,25 +28,21 @@ export default class AllergiesScreen extends React.Component {
   }
 
   _onPressButton(text) {
-    this.setState({
-      allergy : this.state.allergy.concat(text)
-    });
-    console.log('This is the data variable line 24:',this.state.allergy);
-  }
-
-  _addToDatabase() {
     var data = {};
     data.username = 'd@d.com';
-    data.allergy = this.state.allergy;
+    data.allergy = text;
     console.log('This is the database data',data);
-    axios.post(`${address}:9000/api/allergies/`, {data})
+    axios.post(`${address}:9000/api/allergies/`, data)
     .then(function (response) {
       console.log(response.data);
     })
     .catch(function (error) {
       console.log(error);
     });
+
+    console.log('This is the data variable line 24:',this.state.allergy);
   }
+
 
   _showList() {
     axios.get(`${address}:9000/api/allergies/`)
@@ -69,14 +64,9 @@ export default class AllergiesScreen extends React.Component {
           <Button
             onPress={() => this._onPressButton(this.state.text)}
             color="#841584"
-            title="Press Me"
-          />
-          <Text>Local  : {this.state.text}</Text>
-          <Button
-            onPress={() => this._addToDatabase()}
-            color="#841584"
             title="Add to MyList"
           />
+          <Text>List Item  : {this.state.text}</Text>
           <Button
             onPress={() => this._showList()}
             color="#841584"
