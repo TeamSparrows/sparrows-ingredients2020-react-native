@@ -1,7 +1,14 @@
 import React from 'react';
 import axios from 'react-native-axios';
 const address = require('../address');
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  Alert,
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View
+} from 'react-native';
 
 
 

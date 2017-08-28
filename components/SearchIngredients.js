@@ -14,8 +14,6 @@ import {
   TextInput,
   ScrollView,
   Linking,
-
-
 } from 'react-native';
 
 import { Constants, WebBrowser } from 'expo';
