@@ -26,7 +26,15 @@ export default class AllergiesScreen extends React.Component {
   }
 
   render() {
-    return (<Text>This is Allergies Screen!</Text>);
+    return (
+      <View>
+        <TextInput
+          style={{fontSize: 20, height: 40}}
+          onChangeText={(text) => this._loadData(text)}
+        />
+      </View>
+
+      );
 
   }
 }
