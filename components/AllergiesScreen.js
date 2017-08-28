@@ -16,6 +16,14 @@ export default class AllergiesScreen extends React.Component {
       text : text
     });
   }
+
+  _onPressButton(text) {
+    this.setState({
+      data : this.state.data.concat(text)
+    });
+    // console.log('This is the data variable line 25:',this.state.data);
+  }
+
   render() {
   return (
     <View>
