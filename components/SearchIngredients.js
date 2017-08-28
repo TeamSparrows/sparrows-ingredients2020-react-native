@@ -12,74 +12,75 @@ import {
   Image,
   Keyboard,
   TextInput,
-  ScrollView
+  ScrollView,
+  WebBrowser,
 } from 'react-native';
 
 
-export default class SearchIngredients extends React.Component {
+export default class SearchIngredients extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: '' };
+    this.state = {
+      text: '',
+      username: 'd@d.com',
+      searchResultName: '',
+      searchResultLink: '',
+
+    };
     this.enterText = this.enterText.bind(this);
     this.getIngredientsFromDatabase = this.getIngredientsFromDatabase.bind(this);
+    this.handlePress = this.handlePress.bind(this);
+    this.renderResult = this.renderResult.bind(this);
   }
-
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
   getIngredientsFromDatabase(/*search*/) {
-    var search = 'alum'
-    data = {
-      ingredient: 'alum',
-      username: 'd@d.com'
-    }
-    console.log('search', search);
-    console.log('getIngredientsFromDatabase ran')
+    let ingredient = this.state.text.toLowerCase();
+    let username = this.state.username;
+    let data = { ingredient, username };
+    console.log('getIngredientsFromDatabase data', data);
     // axios.get(`${address}:9000/api/test`)
     // axios.get(`${address}:9000/api/ingredients/${search}`)
     axios.post(`${address}:9000/api/ingredients/`, {data})
-    .then(function (response) {
-      alert(response.data._id)
+    .then((res) => {
+      var result = {
+        searchResultName: res.data.name,
+        searchResultLink: res.data.link || ''
+      }
+      console.log('result!!!!!!!', result);
+      this.setState(result);
       console.log(response.data);
     })
     .catch(function (error) {
       console.log(error);
     });
-
-    // axios.get(`${address}:9000/api/ingredients:${search}`)
-    //   .then((response) => {
-    //     // var res = response.json()
-    //     // console.log('res', res);
-    //     console.log('Res Data',response.data);
-    //     Alert.alert(response.data)
-    //   })
-    //   .catch((err) => {
-    //     console.log('err', err);
-    //   })
-
-
   }
-
-
-  postIngredient() {
-    axios.get(`${address}:9000/api/test`)
-      .then((response) => {
-        // var res = response.json()
-        // console.log('res', res);
-        console.log('Res Data',response.data);
-        Alert.alert(response.data)
-      })
-      .catch((err) => {
-        console.log('err', err);
-      })
-  }
-
-
 
   enterText() {
-
     return (
       <Text>{this.state.text}</Text>
+    )
+  }
+  handlePress = () => {
+    console.log('handlePress')
+    console.log('this.state.searchResultLink', this.state.searchResultLink);
+    WebBrowser.openBrowserAsync(this.state.searchResultLink);
+  };
+
+  renderResult() {
+    return (
+      this.state.searchResultLink
+        ? <View>
+            <Text>{  this.state.searchResultName + ' found in database! - '}</Text>
+            <TouchableOpacity
+              onPress={this.handlePress}
+              style={styles.helpLink}>
+              <Text style={styles.helpLinkText}>
+                'Click here for more info!'
+                {/* {`Click here for more info on ${this.state.searchResultName}!`} */}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        : <Text>{this.state.searchResultName + ' not found'}</Text>
     )
   }
   render() {
@@ -94,14 +95,13 @@ export default class SearchIngredients extends React.Component {
           onChangeText={(text) => this.setState({text})}
           placeholder='enter text here'
           onSubmitEditing={this.postUser}
-          autoCapitalize="characters"
           autoCorrect={true}
           keyboardType="email-address"
           blurOnSubmit={true}
           keyboardAppearance="dark"
         />
         <Button title="getIngredientsFromDatabase" onPress={this.getIngredientsFromDatabase} />
-
+        <View>{this.renderResult()}</View>
       </View>
     );
   }
@@ -122,4 +122,39 @@ const styles = StyleSheet.create({
   },
   textInput: {height: 40, borderColor: 'gray', borderWidth: 1},
   hi: {color: 'lightblue', fontSize: 30 },
+  helpLink: {
+    paddingVertical: 15,
+  },
+  helpLinkText: {
+    fontSize: 14,
+    color: '#2e78b7',
+  },
 });
+
+
+
+
+// axios.get(`${address}:9000/api/ingredients:${search}`)
+//   .then((response) => {
+//     // var res = response.json()
+//     // console.log('res', res);
+//     console.log('Res Data',response.data);
+//     Alert.alert(response.data)
+//   })
+//   .catch((err) => {
+//     console.log('err', err);
+//   })
+
+
+// postIngredient() {
+//   axios.get(`${address}:9000/api/test`)
+//     .then((response) => {
+//       // var res = response.json()
+//       // console.log('res', res);
+//       console.log('Res Data',response.data);
+//       Alert.alert(response.data)
+//     })
+//     .catch((err) => {
+//       console.log('err', err);
+//     })
+// }
