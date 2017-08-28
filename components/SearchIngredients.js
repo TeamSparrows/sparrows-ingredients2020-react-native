@@ -13,11 +13,18 @@ import {
   Keyboard,
   TextInput,
   ScrollView,
-  WebBrowser,
+  Linking,
+
+
 } from 'react-native';
+
+import { Constants, WebBrowser } from 'expo';
 
 
 export default class SearchIngredients extends Component {
+  // state = {
+  //   result: null,
+  // };
   constructor(props) {
     super(props);
     this.state = {
@@ -25,15 +32,16 @@ export default class SearchIngredients extends Component {
       username: 'd@d.com',
       searchResultName: '',
       searchResultLink: '',
-
+      result: null,
     };
     this.enterText = this.enterText.bind(this);
     this.getIngredientsFromDatabase = this.getIngredientsFromDatabase.bind(this);
     this.handlePress = this.handlePress.bind(this);
     this.renderResult = this.renderResult.bind(this);
   }
-  componentDidMount() {}
+
   getIngredientsFromDatabase(/*search*/) {
+
     let ingredient = this.state.text.toLowerCase();
     let username = this.state.username;
     let data = { ingredient, username };
@@ -63,44 +71,48 @@ export default class SearchIngredients extends Component {
   handlePress = () => {
     console.log('handlePress')
     console.log('this.state.searchResultLink', this.state.searchResultLink);
-    WebBrowser.openBrowserAsync(this.state.searchResultLink);
+    // WebBrowser.openBrowserAsync(this.state.searchResultLink);
+    Linking.openURL(this.state.searchResultLink);
   };
 
   renderResult() {
-    return (
-      this.state.searchResultLink
-        ? <View>
-            <Text>{  this.state.searchResultName + ' found in database! - '}</Text>
-            <TouchableOpacity
-              onPress={this.handlePress}
-              style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>
-                'Click here for more info!'
-                {/* {`Click here for more info on ${this.state.searchResultName}!`} */}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        : <Text>{this.state.searchResultName + ' not found'}</Text>
-    )
+    var wasClicked = this.state.buttonWasClicked
+      return (
+        this.state.searchResultLink
+          ? <View>
+              <Text>{  this.state.searchResultName + ' is harmful do not consume '}</Text>
+              <TouchableOpacity
+                onPress={this.handlePress}
+                style={styles.helpLink}>
+                <Text style={styles.helpLinkText}>
+                  {`Click here for more info on ${this.state.searchResultName}!`}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          : <Text>{this.state.searchResultName}</Text>
+      )
+
   }
   render() {
 
     return (
       <View style={styles.container}>
 
-        <Text style={styles.hi} >Hii</Text>
+        <Text style={styles.hi} >Search harmful ingredients</Text>
         <TextInput
-          ref={(input) => this.input = input}
+          ref={input=>this._input = input}
           style={styles.textInput}
           onChangeText={(text) => this.setState({text})}
-          placeholder='enter text here'
-          onSubmitEditing={this.postUser}
+          placeholder='alum...'
+          onSubmitEditing={this.getIngredientsFromDatabase}
           autoCorrect={true}
           keyboardType="email-address"
           blurOnSubmit={true}
           keyboardAppearance="dark"
+          placeholderTextColor="lightblue"
+          returnKeyType="search"
         />
-        <Button title="getIngredientsFromDatabase" onPress={this.getIngredientsFromDatabase} />
+        <Button title="Enter Search" onPress={this.getIngredientsFromDatabase} />
         <View>{this.renderResult()}</View>
       </View>
     );
@@ -120,8 +132,15 @@ const styles = StyleSheet.create({
     marginRight: 10,
     backgroundColor: 'skyblue',
   },
-  textInput: {height: 40, borderColor: 'gray', borderWidth: 1},
-  hi: {color: 'lightblue', fontSize: 30 },
+  textInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1
+  },
+  hi: {
+    color: '#34495e',
+    fontSize: 20
+  },
   helpLink: {
     paddingVertical: 15,
   },
