@@ -3,3 +3,8 @@ node_modules/
 npm-debug.*
 .env
 address.js
+.idea
+ios/build
+android/app/build.gradle
+android/app/src/main/java/Ingredients2020/MainApplication.java
+android/settings.gradle
