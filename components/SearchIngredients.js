@@ -78,7 +78,7 @@ export default class SearchIngredients extends Component {
       return (
         this.state.searchResultLink
           ? <View>
-              <Text>{  this.state.searchResultName + ' is harmful do not consume '}</Text>
+              <Text style={styles.warning}>{'Warning : '+ this.state.searchResultName + ' is harmful do not consume. '}</Text>
               <TouchableOpacity
                 onPress={this.handlePress}
                 style={styles.helpLink}>
@@ -95,6 +95,7 @@ export default class SearchIngredients extends Component {
 
     return (
       <View style={styles.container}>
+        <View>{this.renderResult()}</View>
         <TextInput
           ref={input=>this._input = input}
           style={styles.textInput}
@@ -113,7 +114,6 @@ export default class SearchIngredients extends Component {
           color="#841584"
           onPress={this.getIngredientsFromDatabase}
          />
-        <View>{this.renderResult()}</View>
       </View>
     );
   }
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 2,
     backgroundColor: '#fff',
-    marginTop: 50,
+    justifyContent: 'center',
     margin: 20,
   },
   boxSmall: {
@@ -135,10 +135,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 40,
+    fontSize: 20,
   },
-  hi: {
-    color: '#34495e',
-    fontSize: 20
+  warning: {
+    backgroundColor: 'pink',
+    fontSize: 20,
   },
   helpLink: {
     paddingVertical: 15,
