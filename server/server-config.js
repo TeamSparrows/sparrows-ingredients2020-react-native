@@ -17,13 +17,13 @@ app.post('/api/pastSearches', handler.pastSearches);
 app.post('/api/image', handler.googleCloudSearch);
 app.get('/callback', handler.callback);
 app.post('/api/findOrCreateUser', handler.findOrCreateUser);
+var alergiesList = ['peanut', 'milk', 'soy'];
 app.get('/api/allergies/', function(req, res){
-  console.log('This is the body :', req.body);
-  res.status(200).send('Hello');
+  res.status(200).send(alergiesList);
 });
-// app.post('/api/allergies/',function(req, res) {
-//   console.log('This is the body :', req.body);
-// });
+app.post('/api/allergies/',function(req, res) {
+  console.log('This is the body :', req.body);
+});
 
 
 //

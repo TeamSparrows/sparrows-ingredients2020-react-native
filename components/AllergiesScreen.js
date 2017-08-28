@@ -49,6 +49,16 @@ export default class AllergiesScreen extends React.Component {
     });
   }
 
+  _showList() {
+    axios.get(`${address}:9000/api/allergies/`)
+      .then(function (response) {
+        console.log('Show me the list', response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -66,6 +76,11 @@ export default class AllergiesScreen extends React.Component {
             onPress={() => this._addToDatabase()}
             color="#841584"
             title="Add to MyList"
+          />
+          <Button
+            onPress={() => this._showList()}
+            color="#841584"
+            title="Show Mylist"
           />
       </View>
       );
