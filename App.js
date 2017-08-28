@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { DrawerNavigator } from 'react-navigation';
+import { TabNavigator, DrawerNavigator } from 'react-navigation';
 import TextScreen from './components/TextScreen'
 import PhotoScreen from './components/PhotoScreen'
 import BarcodeScreen from './components/BarcodeScreen'
@@ -8,7 +8,7 @@ import AllergiesScreen from './components/AllergiesScreen'
 import ProfileScreen from './components/ProfileScreen'
 import Example from './components/Example'
 
-const MainScreenNavigator = DrawerNavigator({
+const MainScreenNavigator = TabNavigator({
   Text: { screen: TextScreen },
   Photo: { screen: PhotoScreen },
   Barcode: { screen: BarcodeScreen },
