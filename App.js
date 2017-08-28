@@ -3,7 +3,6 @@ import { Alert, Button, StyleSheet, Text, Image, TextInput, View } from 'react-n
 import { TabNavigator, DrawerNavigator } from 'react-navigation';
 import SearchIngredients from './components/SearchIngredients';
 import PhotoScreen from './components/PhotoScreen';
-import BarcodeScreen from './components/BarcodeScreen';
 import AllergiesScreen from './components/AllergiesScreen';
 import ProfileScreen from './components/ProfileScreen';
 import { ImagePicker } from 'expo';
@@ -12,7 +11,6 @@ import { ImagePicker } from 'expo';
 const MainScreenNavigator = TabNavigator({
   Search: { screen: SearchIngredients },
   Photo: { screen: PhotoScreen },
-  Barcode: { screen: BarcodeScreen },
   Allergies: { screen: AllergiesScreen },
   Profile: { screen: ProfileScreen },
 });
