@@ -18,6 +18,11 @@ app.post('/api/image', handler.googleCloudSearch);
 app.get('/callback', handler.callback);
 app.post('/api/findOrCreateUser', handler.findOrCreateUser);
 
+
+//
+// app.get('/api/ingredients/:seach', handler.ingredients);
+
+
 //test routes
 app.get('/api/test', (req, res) => {
   res.send('hello string')
